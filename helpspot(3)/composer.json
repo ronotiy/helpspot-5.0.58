@@ -1,0 +1,89 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^7.3|^8.0",
+        "ext-imap": "*",
+        "ext-zlib": "*",
+        "aacotroneo/laravel-saml2": "2.1.*",
+        "adldap2/adldap2": "^10.2",
+        "aws/aws-sdk-php": "^3.135",
+        "bugsnag/bugsnag-laravel": "^2.0",
+        "erusev/parsedown": "1.7.0",
+        "erusev/parsedown-extra": "0.7.0",
+        "ezyang/htmlpurifier": "4.13.0",
+        "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^2.0",
+        "fzaninotto/faker": "^1.9.1",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "joypixels/emoji-toolkit": "^6.0",
+        "laravel/framework": "^8.12",
+        "laravel/legacy-factories": "^1.0",
+        "laravel/sanctum": "^2.5",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "naneau/semver": "dev-master",
+        "nickcernis/html-to-markdown": "2.1.*",
+        "shipping-docker/vessel": "^4.0",
+        "soundasleep/html2text": "^1.1.0",
+        "tiesa/ldap": "1.0.*@dev",
+        "zbateson/mail-mime-parser": "^1.1"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "laravel/sail": "^0.0.5",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "HS\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    }
+}

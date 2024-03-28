@@ -1,0 +1,3027 @@
+<?php
+
+namespace HS\Install\Tables;
+
+use stdClass as BaseClass;
+
+class stdClass extends BaseClass
+{
+    public static function __set_state(array $data)
+    {
+        $stdClass = new static;
+        foreach ($data as $key => $value) {
+            $stdClass->$key = $value;
+        }
+
+        return $stdClass;
+    }
+}
+
+class TableBuilder extends stdClass
+{
+    /**
+     * All tables.
+     * @var \HS\Install\Tables\TableCollection
+     */
+    protected static $tables;
+
+    public static function tables()
+    {
+        if (static::$tables instanceof Tables) {
+            return static::$tables;
+        }
+
+        $rawTables = [
+            0 => stdClass::__set_state([
+                    'name' => 'HS_Address_Book',
+                    'incrementColumn' => 'xContact',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xContact',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sFirstName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sLastName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sEmail',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sTitle',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sDescription',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'fHighlight',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            1 => stdClass::__set_state([
+                    'name' => 'HS_Assignment_Chain',
+                    'incrementColumn' => 'xAssignmentChainId',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xAssignmentChainId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'xPreviousPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'xChangedByPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'dtChange',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'sLogItem',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            2 => stdClass::__set_state([
+                    'name' => 'HS_Automation_Rules',
+                    'incrementColumn' => 'xAutoRule',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xAutoRule',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sRuleName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tRuleDef',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            3 => stdClass::__set_state([
+                    'name' => 'HS_Bayesian_Corpus',
+                    'incrementColumn' => null,
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'sWord',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'iCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            4 => stdClass::__set_state([
+                    'name' => 'HS_Bayesian_MsgCounts',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'iMsgCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            5 => stdClass::__set_state([
+                    'name' => 'HS_Category',
+                    'incrementColumn' => 'xCategory',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sCategory',
+                                    'type' => 'varchar(200)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sCategoryGroup',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fAllowPublicSubmit',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'xPersonDefault',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'fAutoAssignTo',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'sPersonList',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // true, but just integers
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'sCustomFieldList',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // true, but just integers
+                                ]),
+                        ],
+                ]),
+            6 => stdClass::__set_state([
+                    'name' => 'HS_Category_ReportingTags',
+                    'incrementColumn' => 'xReportingTag',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xReportingTag',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sReportingTag',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'iOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            7 => stdClass::__set_state([
+                    'name' => 'HS_CustomFields',
+                    'incrementColumn' => 'xCustomField',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xCustomField',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'fieldName',
+                                    'type' => 'varchar(200)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'isRequired',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'isPublic',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'isAlwaysVisible',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'fieldType',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'iOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'iDecimalPlaces',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'sTxtSize',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'sRegex',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'sAjaxUrl',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'lrgTextRows',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'listItems',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            8 => stdClass::__set_state([
+                    'name' => 'HS_Documents',
+                    'incrementColumn' => 'xDocumentId',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xDocumentId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sFilename',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sFileMimeType',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sCID',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'blobFile',
+                                    'type' => 'blob',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            10 => stdClass::__set_state([
+                    'name' => 'HS_Errors',
+                    'incrementColumn' => 'xErrors',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => 'dtErrorDate',
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xErrors',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'dtErrorDate',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sType',
+                                    'type' => 'varchar(40)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sFile',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sLine',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sDesc',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            11 => stdClass::__set_state([
+                    'name' => 'HS_Filter_People',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xFilter',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            12 => stdClass::__set_state([
+                    'name' => 'HS_Filter_Performance',
+                    'incrementColumn' => 'xID',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => 'dtRunAt',
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xID',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xFilter',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'dTime',
+                                    'type' => 'decimal(6,4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'dtRunAt',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sType',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            13 => stdClass::__set_state([
+                    'name' => 'HS_Filters',
+                    'incrementColumn' => 'xFilter',
+                    'passThru' => false,
+                    'legacyColumns' => [
+                        'fGlobal',
+                    ],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xFilter',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fType',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+//                            3 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'fPermissionGroup',
+//                                    'type' => 'int(11)',
+//                                    'encode' => false,
+//                                    'serialized' => false,
+//                                )),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fShowCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'fCustomerFriendlyRSS',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'dtCachedCountAt',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'iCachedCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'fCacheNever',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'fDisplayTop',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'sShortcut',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'sFilterName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'sFilterView',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            13 => stdClass::__set_state([
+                                    'name' => 'tFilterDef',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            14 => stdClass::__set_state([
+                    'name' => 'HS_Forums',
+                    'incrementColumn' => 'xForumId',
+                    'passThru' => false,
+                    'legacyColumns' => ['fTroll'],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xForumId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sForumName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fPrivate',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sDescription',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tModerators',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // True, but just integers
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'fClosed',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'iOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            15 => stdClass::__set_state([
+                    'name' => 'HS_Forums_KnownUsers',
+                    'incrementColumn' => 'xKnownUserId',
+                    'passThru' => false,
+                    'legacyColumns' => ['fTroll'],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xKnownUserId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sName',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sIP',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sOS',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sLabel',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            16 => stdClass::__set_state([
+                    'name' => 'HS_Forums_Posts',
+                    'incrementColumn' => 'xPostId',
+                    'passThru' => false,
+                    'legacyColumns' => ['fTroll'],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPostId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xTopicId',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'dtGMTPosted',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fSpam',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'iSpamProbability',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'fEmailUpdate',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'sName',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'sIP',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'sOS',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'sEmail',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'sURL',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'sBrowser',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            13 => stdClass::__set_state([
+                                    'name' => 'tPost',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            17 => stdClass::__set_state([
+                    'name' => 'HS_Forums_Topics',
+                    'incrementColumn' => 'xTopicId',
+                    'passThru' => false,
+                    'legacyColumns' => ['fTroll'],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xTopicId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xForumId',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fClosed',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fSticky',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'dtGMTPosted',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sName',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'sTopic',
+                                    'type' => 'varchar(200)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            18 => stdClass::__set_state([
+                    'name' => 'HS_KB_Books',
+                    'incrementColumn' => 'xBook',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xBook',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sBookName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'iOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fPrivate',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tDescription',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'tEditors',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // True, but just integers
+                                ]),
+                        ],
+                ]),
+            19 => stdClass::__set_state([
+                    'name' => 'HS_KB_Chapters',
+                    'incrementColumn' => 'xChapter',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xChapter',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xBook',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sChapterName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'iOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fAppendix',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'fHidden',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            20 => stdClass::__set_state([
+                    'name' => 'HS_KB_Documents',
+                    'incrementColumn' => 'xDocumentId',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xDocumentId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPage',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fDownload',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sFilename',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sFileMimeType',
+                                    'type' => 'varchar(40)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'blobFile',
+                                    'type' => 'blob',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            21 => stdClass::__set_state([
+                    'name' => 'HS_KB_Pages',
+                    'incrementColumn' => 'xPage',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPage',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xChapter',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sPageName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'tPage',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'xPersonCreator',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'xPersonLastUpdate',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'dtCreatedOn',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'dtUpdatedOn',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'iOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'fHidden',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'fHighlight',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'iHelpful',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'iNotHelpful',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            22 => stdClass::__set_state([
+                    'name' => 'HS_KB_RelatedPages',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPage',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRelatedPage',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            23 => stdClass::__set_state([
+                    'name' => 'HS_Login_Attempts',
+                    'incrementColumn' => 'xAttempt',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => 'dtDateAdded',
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xAttempt',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sUsername',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'dtDateAdded',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fValid',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            24 => stdClass::__set_state([
+                    'name' => 'HS_Mail_Rules',
+                    'incrementColumn' => 'xMailRule',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xMailRule',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sRuleName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tRuleDef',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            25 => stdClass::__set_state([
+                    'name' => 'HS_Mailboxes',
+                    'incrementColumn' => 'xMailbox',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xMailbox',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sMailbox',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sHostname',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sUsername',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sPassword',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sPort',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'sType',
+                                    'type' => 'varchar(5)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'sSecurity',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'fAutoResponse',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'sReplyName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'sReplyEmail',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            13 => stdClass::__set_state([
+                                    'name' => 'sLastImportMessageId',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            14 => stdClass::__set_state([
+                                    'name' => 'sLastImportFrom',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            15 => stdClass::__set_state([
+                                    'name' => 'iLastImportAttemptCt',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            16 => stdClass::__set_state([
+                                    'name' => 'tAutoResponse',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            17 => stdClass::__set_state([
+                                    'name' => 'tAutoResponse_html',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            18 => stdClass::__set_state([
+                                    'name' => 'sSMTPSettings',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            26 => stdClass::__set_state([
+                    'name' => 'HS_Mailboxes_StuckEmails',
+                    'incrementColumn' => 'xStuckEmail',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xStuckEmail',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xMailbox',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sEmailMessageId',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sEmailFrom',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sEmailDate',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            28 => stdClass::__set_state([
+                    'name' => 'HS_Multi_Portal',
+                    'incrementColumn' => 'xPortal',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPortal',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xMailboxToSendFrom',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sHost',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sPortalPath',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sPortalName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'sPortalPhone',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'tPortalMsg',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'tDisplayKBs',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // Yes, but just integers
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'tDisplayForums',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // Yes, but just integers
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'tDisplayCategories',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // Yes, but just integers
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'tDisplayCfs',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // Yes, but just integers
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'tHistoryMailboxes',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // Yes, but just integers
+                                ]),
+                        ],
+                ]),
+            29 => stdClass::__set_state([
+                    'name' => 'HS_Permission_Groups',
+                    'incrementColumn' => 'xGroup',
+                    'passThru' => false,
+                    'legacyColumns' => [
+                        'fNotifyOnNew',
+                        'fCanAssignTimeToOthers',
+                    ],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xGroup',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sGroup',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fModuleReports',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fModuleKbPriv',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fModuleForumsPriv',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'fViewInbox',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'fCanBatchRespond',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'fCanMerge',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'fCanViewOwnReqsOnly',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'fLimitedToAssignedCats',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'fCanAdvancedSearch',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'fCanManageSpam',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'fCanManageTrash',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            13 => stdClass::__set_state([
+                                    'name' => 'fCanManageKB',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            14 => stdClass::__set_state([
+                                    'name' => 'fCanManageForum',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            30 => stdClass::__set_state([
+                    'name' => 'HS_Person',
+                    'incrementColumn' => 'xPerson',
+                    'passThru' => false,
+                    'legacyColumns' => [
+                        'fDefaultTTOpen',
+                        'sPassword',
+                    ],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sFname',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sLname',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sUsername',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sEmail',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sEmail2',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'sSMS',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'xSMSService',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'sPasswordHash',
+                                    'type' => 'varchar(60)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'sPhone',
+                                    'type' => 'varchar(32)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'tSignature',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'tSignature_HTML',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+//                            12 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'tMobileSignature',
+//                                    'type' => 'text',
+//                                    'encode' => true,
+//                                    'serialized' => false,
+//                                )),
+                            13 => stdClass::__set_state([
+                                    'name' => 'fNotifyEmail',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            14 => stdClass::__set_state([
+                                    'name' => 'fNotifyEmail2',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            15 => stdClass::__set_state([
+                                    'name' => 'fNotifySMS',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            16 => stdClass::__set_state([
+                                    'name' => 'fNotifySMSUrgent',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            17 => stdClass::__set_state([
+                                    'name' => 'xPersonPhotoId',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            18 => stdClass::__set_state([
+                                    'name' => 'fUserType',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            19 => stdClass::__set_state([
+                                    'name' => 'xPersonOutOfOffice',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            20 => stdClass::__set_state([
+                                    'name' => 'fNotifyNewRequest',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            21 => stdClass::__set_state([
+                                    'name' => 'fKeyboardShortcuts',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            22 => stdClass::__set_state([
+                                    'name' => 'fDefaultToPublic',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            23 => stdClass::__set_state([
+                                    'name' => 'fHideWysiwyg',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            24 => stdClass::__set_state([
+                                    'name' => 'fHideImages',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            25 => stdClass::__set_state([
+                                    'name' => 'fReturnToReq',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            26 => stdClass::__set_state([
+                                    'name' => 'iRequestHistoryLimit',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            27 => stdClass::__set_state([
+                                    'name' => 'fRequestHistoryView',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+//                            28 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'fIphoneDefaultMyqueue',
+//                                    'type' => 'int(11)',
+//                                    'encode' => false,
+//                                    'serialized' => false,
+//                                )),
+                            29 => stdClass::__set_state([
+                                    'name' => 'fShowWelcome',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            30 => stdClass::__set_state([
+                                    'name' => 'sHTMLEditor',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            31 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            32 => stdClass::__set_state([
+                                    'name' => 'sWorkspaceDefault',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            33 => stdClass::__set_state([
+                                    'name' => 'tWorkspace',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // True, but just machine-readable keys and integer values
+                                ]),
+                        ],
+                ]),
+            31 => stdClass::__set_state([
+                    'name' => 'HS_Person_Photos',
+                    'incrementColumn' => 'xPersonPhotoId',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPersonPhotoId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sDescription',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sFilename',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sFileMimeType',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sSeries',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'blobPhoto',
+                                    'type' => 'blob',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+//            32 =>
+//                stdClass::__set_state(array(
+//                    'name' => 'HS_Person_Status',
+//                    'incrementColumn' => null, // Does not auto-increment
+//                    'passThru' => false,
+//                    'legacyColumns' => array(),
+//                    'truncate' => false,
+//                    'columns' =>
+//                        array (
+//                            0 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'xPersonStatus',
+//                                    'type' => 'int(11)',
+//                                    'encode' => false,
+//                                    'serialized' => false,
+//                                )),
+//                            1 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'xRequest',
+//                                    'type' => 'int(11)',
+//                                    'encode' => false,
+//                                    'serialized' => false,
+//                                )),
+//                            2 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'dtGMTEntered',
+//                                    'type' => 'int(11)',
+//                                    'encode' => false,
+//                                    'serialized' => false,
+//                                )),
+//                            3 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'sPage',
+//                                    'type' => 'varchar(255)',
+//                                    'encode' => true,
+//                                    'serialized' => false,
+//                                )),
+//                            4 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'sDetails',
+//                                    'type' => 'varchar(255)',
+//                                    'encode' => true,
+//                                    'serialized' => false,
+//                                )),
+//                        ),
+//                )),
+            33 => stdClass::__set_state([
+                    'name' => 'HS_Portal_Bayesian_Corpus',
+                    'incrementColumn' => null,
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'sWord',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'iCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            34 => stdClass::__set_state([
+                    'name' => 'HS_Portal_Bayesian_MsgCounts',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'iMsgCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            35 => stdClass::__set_state([
+                    'name' => 'HS_Portal_Login',
+                    'incrementColumn' => 'xLogin',
+                    'passThru' => false,
+                    'legacyColumns' => [
+                        'sPassword',
+                    ],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xLogin',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sEmail',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sPasswordHash',
+                                    'type' => 'varchar(60)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            36 => stdClass::__set_state([
+                    'name' => 'HS_Reminder',
+                    'incrementColumn' => 'xReminder',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xReminder',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPersonCreator',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'dtGMTReminder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tReminder',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            37 => stdClass::__set_state([
+                    'name' => 'HS_Reminder_Person',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xReminder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            38 => stdClass::__set_state([
+                    'name' => 'HS_Request',
+                    'incrementColumn' => 'xRequest',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'fOpenedVia',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xOpenedViaId',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'xPortal',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'xMailboxToSendFrom',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'xPersonOpenedBy',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'xPersonAssignedTo',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'fOpen',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'xStatus',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'fUrgent',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'xCategory',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'dtGMTOpened',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'dtGMTClosed',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            13 => stdClass::__set_state([
+                                    'name' => 'iLastReplyBy',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            14 => stdClass::__set_state([
+                                    'name' => 'iLastReadCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            15 => stdClass::__set_state([
+                                    'name' => 'fTrash',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            16 => stdClass::__set_state([
+                                    'name' => 'dtGMTTrashed',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            17 => stdClass::__set_state([
+                                    'name' => 'sRequestPassword',
+                                    'type' => 'varchar(20)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            18 => stdClass::__set_state([
+                                    'name' => 'sTitle',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            19 => stdClass::__set_state([
+                                    'name' => 'sUserId',
+                                    'type' => 'varchar(80)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            20 => stdClass::__set_state([
+                                    'name' => 'sFirstName',
+                                    'type' => 'varchar(40)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            21 => stdClass::__set_state([
+                                    'name' => 'sLastName',
+                                    'type' => 'varchar(40)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            22 => stdClass::__set_state([
+                                    'name' => 'sEmail',
+                                    'type' => 'varchar(100)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            23 => stdClass::__set_state([
+                                    'name' => 'sPhone',
+                                    'type' => 'varchar(40)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            24 => stdClass::__set_state([
+                                    'name' => 'sRequestHash',
+                                    'type' => 'varchar(32)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            39 => stdClass::__set_state([
+                    'name' => 'HS_Request_History',
+                    'incrementColumn' => 'xRequestHistory',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xRequestHistory',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'dtGMTChange',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'xDocumentId',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'fPublic',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'fInitial',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'iTimerSeconds',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            8 => stdClass::__set_state([
+                                    'name' => 'fNoteIsHTML',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            9 => stdClass::__set_state([
+                                    'name' => 'fMergedFromRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            10 => stdClass::__set_state([
+                                    'name' => 'sRequestHistoryHash',
+                                    'type' => 'varchar(32)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            11 => stdClass::__set_state([
+                                    'name' => 'tLog',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                            12 => stdClass::__set_state([
+                                    'name' => 'tNote',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            13 => stdClass::__set_state([
+                                    'name' => 'tEmailHeaders',
+                                    'type' => 'text',
+                                    'encode' => true,     // Not getting encoded at all, straight pass-thru
+                                    'serialized' => true, // True, but headers are ASCII, can leave alone
+                                ]),
+                        ],
+                ]),
+            40 => stdClass::__set_state([
+                    'name' => 'HS_Request_Merged',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xMergedRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            41 => stdClass::__set_state([
+                    'name' => 'HS_Request_Note_Drafts',
+                    'incrementColumn' => 'xDraft',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xDraft',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'dtGMTSaved',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tNote',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            42 => stdClass::__set_state([
+                    'name' => 'HS_Request_Pushed',
+                    'incrementColumn' => 'xPushed',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xPushed',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'dtGMTPushed',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sPushedTo',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sReturnedID',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'tComment',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            43 => stdClass::__set_state([
+                    'name' => 'HS_Request_ReportingTags',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xReportingTag',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            44 => stdClass::__set_state([
+                    'name' => 'HS_Reset_Password',
+                    'incrementColumn' => 'xReset',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xReset',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'dtCreatedOn',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'xLogin',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sToken',
+                                    'type' => 'varchar(60)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            45 => stdClass::__set_state([
+                    'name' => 'HS_Response_People',
+                    'incrementColumn' => null,
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xResponse',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            46 => stdClass::__set_state([
+                    'name' => 'HS_Responses',
+                    'incrementColumn' => 'xResponse',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xResponse',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sResponseTitle',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sFolder',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'tResponse',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'tResponseOptions',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false, // This is JSON, not serialized PHP
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'fType',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+//                            7 =>
+//                                stdClass::__set_state(array(
+//                                    'name' => 'fPermissionGroup',
+//                                    'type' => 'int(11)',
+//                                    'encode' => false,
+//                                    'serialized' => false,
+//                                )),
+                            8 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            47 => stdClass::__set_state([
+                    'name' => 'HS_Saved_Reports',
+                    'incrementColumn' => 'xReport',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xReport',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sReport',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sPage',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sShow',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'tData',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            48 => stdClass::__set_state([
+                    'name' => 'HS_Search_Queries',
+                    'incrementColumn' => 'xSearch',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => 'dtGMTPerformed',
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xSearch',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'dtGMTPerformed',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sSearch',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sFromPage',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sSearchType',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'iResultCount',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'xPortal',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            49 => stdClass::__set_state([
+                    'name' => 'HS_Sessions2',
+                    'incrementColumn' => null,
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'sesskey',
+                                    'type' => 'varchar(128)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'expiry',
+                                    'type' => 'datetime',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'expireref',
+                                    'type' => 'varchar(250)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'created',
+                                    'type' => 'datetime',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'modified',
+                                    'type' => 'datetime',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sessdata',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            50 => stdClass::__set_state([
+                    'name' => 'HS_Settings',
+                    'incrementColumn' => null,
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'sSetting',
+                                    'type' => 'varchar(50)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'tValue',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            /*
+            51 =>
+                stdClass::__set_state(array(
+                    'name' => 'HS_Sph_Counter',
+                    'incrementColumn' => 'counter_id',
+                    'passThru' => true,
+                    'legacyColumns' => array(),
+                    'truncate' => false,
+                    'columns' =>
+                        array (
+                            0 =>
+                                stdClass::__set_state(array(
+                                    'name' => 'counter_key',
+                                    'type' => 'varchar(20)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                )),
+                            1 =>
+                                stdClass::__set_state(array(
+                                    'name' => 'max_doc_id',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                )),
+                        ),
+                )),
+            */
+            52 => stdClass::__set_state([
+                    'name' => 'HS_Stats_Responses',
+                    'incrementColumn' => 'xEvent',
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xEvent',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xResponse',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'dtGMTOccured',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            53 => stdClass::__set_state([
+                    'name' => 'HS_Subscriptions',
+                    'incrementColumn' => 'xSubscriptions',
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xSubscriptions',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            54 => stdClass::__set_state([
+                    'name' => 'HS_Tags',
+                    'incrementColumn' => 'xTag',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xTag',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sTag',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            55 => stdClass::__set_state([
+                    'name' => 'HS_Tags_Map',
+                    'incrementColumn' => 'xTagMap',
+                    'passThru' => true,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xTagMap',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xTag',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPage',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'xTopicId',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            56 => stdClass::__set_state([
+                    'name' => 'HS_Time_Tracker',
+                    'incrementColumn' => 'xTimeId',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xTimeId',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'xRequest',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'xPerson',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'iSeconds',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fBillable',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'dtGMTDate',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'dtGMTDateAdded',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'tDescription',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            57 => stdClass::__set_state([
+                    'name' => 'HS_Triggers',
+                    'incrementColumn' => 'xTrigger',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xTrigger',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sTriggerName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'fType',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'tTriggerDef',
+                                    'type' => 'text',
+                                    'encode' => true,
+                                    'serialized' => true,
+                                ]),
+                        ],
+                ]),
+            58 => stdClass::__set_state([
+                    'name' => 'HS_luSMS',
+                    'incrementColumn' => 'xSMSService',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xSMSService',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sName',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'sFromSize',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'sMsgSize',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            4 => stdClass::__set_state([
+                                    'name' => 'sTotalSize',
+                                    'type' => 'varchar(10)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            5 => stdClass::__set_state([
+                                    'name' => 'sPrefixType',
+                                    'type' => 'varchar(40)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            6 => stdClass::__set_state([
+                                    'name' => 'sAddress',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            7 => stdClass::__set_state([
+                                    'name' => 'fTop',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+            59 => stdClass::__set_state([
+                    'name' => 'HS_luStatus',
+                    'incrementColumn' => 'xStatus',
+                    'passThru' => false,
+                    'legacyColumns' => [],
+                    'truncate' => false,
+                    'columns' => [
+                            0 => stdClass::__set_state([
+                                    'name' => 'xStatus',
+                                    'type' => 'int(10) unsigned',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            1 => stdClass::__set_state([
+                                    'name' => 'sStatus',
+                                    'type' => 'varchar(255)',
+                                    'encode' => true,
+                                    'serialized' => false,
+                                ]),
+                            2 => stdClass::__set_state([
+                                    'name' => 'fDeleted',
+                                    'type' => 'tinyint(4)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                            3 => stdClass::__set_state([
+                                    'name' => 'fOrder',
+                                    'type' => 'int(11)',
+                                    'encode' => false,
+                                    'serialized' => false,
+                                ]),
+                        ],
+                ]),
+        ];
+
+        $tables = new TableCollection;
+
+        foreach ($rawTables as $rawTable) {
+            $table = new Table($rawTable);
+            $tables->addTable($table);
+        }
+
+        static::$tables = $tables;
+
+        return $tables;
+    }
+}

@@ -1,0 +1,5 @@
+<?php
+define('cMULTIPORTAL', {{portal}});
+define('cHOST', '{{chost}}');
+
+require_once('{{indexpath}}');

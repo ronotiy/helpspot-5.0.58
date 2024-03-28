@@ -1,0 +1,31 @@
+GoogieSpell is copyrighted work of Amir Salihefendic.
+
+GoogieSpell refers to googiespell .js and googiespell.css. Software
+refers to GoogieSpell.
+
+Licensee refers to UserScape, Inc
+
+By buying a commercial license for GoogieSpell the following terms are
+accepted and the following permissions are given from the copyright
+holder of GoogieSpell:
+- The licensee has permission to use this GPL'ed software in/with
+proprietary software
+- The licensee may not (directly) sell copies of this software
+- The licensee may not change the license of this software
+- The licensee has permission to use, copy, modify, merge, publish or
+distribute this software
+- If the licensee improves this software, then the licensee is
+compelled to send back the improvements to the copyright holder of
+GoogieSpell
+- The licensee can use this software unlimited (if it is the
+licensee's own projects)
+- The licensee can upgrade to future versions of GoogieSpell without
+buying a new commercial license
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
